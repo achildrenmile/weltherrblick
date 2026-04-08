@@ -109,11 +109,14 @@ export class CivilianFlightLayer extends BaseDataLayer {
     for (const f of this.flights) {
       const entity = this.viewer.entities.add({
         position: Cesium.Cartesian3.fromDegrees(f.lon, f.lat, f.altitude),
-        point: {
-          pixelSize: 4,
-          color: Cesium.Color.fromCssColorString('#00d4ff').withAlpha(0.8),
-          outlineColor: Cesium.Color.fromCssColorString('#00d4ff').withAlpha(0.3),
-          outlineWidth: 1,
+        billboard: {
+          image: '/plane-icon.svg',
+          width: 20,
+          height: 20,
+          color: Cesium.Color.fromCssColorString('#00d4ff').withAlpha(0.9),
+          rotation: -Cesium.Math.toRadians(f.heading),
+          alignedAxis: Cesium.Cartesian3.UNIT_Z,
+          scaleByDistance: new Cesium.NearFarScalar(1e5, 1.0, 1e7, 0.3),
         },
         label: {
           text: f.callsign || f.icao24,
@@ -122,7 +125,7 @@ export class CivilianFlightLayer extends BaseDataLayer {
           outlineColor: Cesium.Color.BLACK,
           outlineWidth: 2,
           style: Cesium.LabelStyle.FILL_AND_OUTLINE,
-          pixelOffset: new Cesium.Cartesian2(0, -12),
+          pixelOffset: new Cesium.Cartesian2(0, -16),
           scale: 0.8,
           distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0, 2000000),
           show: true,
@@ -219,11 +222,14 @@ export class MilitaryFlightLayer extends BaseDataLayer {
     for (const f of this.flights) {
       const entity = this.viewer.entities.add({
         position: Cesium.Cartesian3.fromDegrees(f.lon, f.lat, f.altitude),
-        point: {
-          pixelSize: 5,
+        billboard: {
+          image: '/jet-icon.svg',
+          width: 22,
+          height: 22,
           color: Cesium.Color.fromCssColorString('#ffb000').withAlpha(0.9),
-          outlineColor: Cesium.Color.fromCssColorString('#ffb000').withAlpha(0.4),
-          outlineWidth: 2,
+          rotation: -Cesium.Math.toRadians(f.heading),
+          alignedAxis: Cesium.Cartesian3.UNIT_Z,
+          scaleByDistance: new Cesium.NearFarScalar(1e5, 1.0, 1e7, 0.3),
         },
         label: {
           text: f.callsign || f.icao24,
@@ -232,7 +238,7 @@ export class MilitaryFlightLayer extends BaseDataLayer {
           outlineColor: Cesium.Color.BLACK,
           outlineWidth: 2,
           style: Cesium.LabelStyle.FILL_AND_OUTLINE,
-          pixelOffset: new Cesium.Cartesian2(0, -14),
+          pixelOffset: new Cesium.Cartesian2(0, -16),
           scale: 0.8,
           distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0, 2000000),
           show: true,

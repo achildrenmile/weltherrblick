@@ -95,24 +95,17 @@ export class EarthquakeLayer extends BaseDataLayer {
           ? Cesium.Color.fromCssColorString('#ffb000')
           : Cesium.Color.fromCssColorString('#00ff41')
 
-      const size = Math.max(4, Math.min(20, q.mag * 3))
+      const iconScale = Math.max(0.5, Math.min(2.0, q.mag * 0.35))
 
       const entity = this.viewer.entities.add({
         position: Cesium.Cartesian3.fromDegrees(q.lon, q.lat, 0),
-        ellipse: {
-          semiMinorAxis: size * 5000,
-          semiMajorAxis: size * 5000,
-          material: color.withAlpha(0.5),
-          outline: true,
-          outlineColor: color.withAlpha(0.8),
-          outlineWidth: 1,
-          height: 0,
-        },
-        point: {
-          pixelSize: size,
-          color: color.withAlpha(0.9),
-          outlineColor: color.withAlpha(0.4),
-          outlineWidth: 2,
+        billboard: {
+          image: '/quake-icon.svg',
+          width: 24,
+          height: 24,
+          color,
+          scale: iconScale,
+          scaleByDistance: new Cesium.NearFarScalar(1e5, 1.0, 1e7, 0.4),
         },
         label: {
           text: `M${q.mag.toFixed(1)}`,
@@ -121,7 +114,7 @@ export class EarthquakeLayer extends BaseDataLayer {
           outlineColor: Cesium.Color.BLACK,
           outlineWidth: 2,
           style: Cesium.LabelStyle.FILL_AND_OUTLINE,
-          pixelOffset: new Cesium.Cartesian2(0, -size - 8),
+          pixelOffset: new Cesium.Cartesian2(0, -(iconScale * 24) / 2 - 8),
           scale: 0.8,
           distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0, 5000000),
         },

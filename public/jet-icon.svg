@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
+  <!-- Fuselage -->
+  <path d="M16 1 L18 8 L18 24 L16 30 L14 24 L14 8 Z" fill="#ffffff" opacity="0.9"/>
+  <!-- Delta wings -->
+  <path d="M14 14 L1 24 L3 25 L14 18 Z" fill="#ffffff" opacity="0.85"/>
+  <path d="M18 14 L31 24 L29 25 L18 18 Z" fill="#ffffff" opacity="0.85"/>
+  <!-- Canards -->
+  <path d="M14 8 L8 11 L8 12 L14 10 Z" fill="#ffffff" opacity="0.7"/>
+  <path d="M18 8 L24 11 L24 12 L18 10 Z" fill="#ffffff" opacity="0.7"/>
+  <!-- Tail fins -->
+  <path d="M15 22 L12 27 L14 27 L15 24 Z" fill="#ffffff" opacity="0.7"/>
+  <path d="M17 22 L20 27 L18 27 L17 24 Z" fill="#ffffff" opacity="0.7"/>
+  <!-- Engine glow -->
+  <ellipse cx="16" cy="29" rx="2" ry="1.5" fill="#ff6600" opacity="0.6"/>
+</svg>

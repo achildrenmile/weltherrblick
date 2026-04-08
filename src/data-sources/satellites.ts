@@ -34,7 +34,7 @@ const TLE_FALLBACK = '/api/celestrak/NORAD/elements/gp.php?GROUP=stations&FORMAT
 
 export class SatelliteLayer extends BaseDataLayer {
   private satellites: SatRecord[] = []
-  private pointCollection: Cesium.PointPrimitiveCollection | null = null
+  private billboards: Cesium.BillboardCollection | null = null
   private orbitEntity: Cesium.Entity | null = null
   private tleCache: string | null = null
   private tleCacheTime = 0
@@ -55,9 +55,9 @@ export class SatelliteLayer extends BaseDataLayer {
 
     this.onCountUpdate(this.satellites.length)
 
-    // Create point primitives
-    this.pointCollection = new Cesium.PointPrimitiveCollection()
-    this.viewer.scene.primitives.add(this.pointCollection)
+    // Create billboard collection for satellite icons
+    this.billboards = new Cesium.BillboardCollection({ scene: this.viewer.scene })
+    this.viewer.scene.primitives.add(this.billboards)
 
     // Initial positions
     this.updatePositions()
@@ -73,9 +73,9 @@ export class SatelliteLayer extends BaseDataLayer {
   }
 
   dispose() {
-    if (this.pointCollection) {
-      this.viewer.scene.primitives.remove(this.pointCollection)
-      this.pointCollection = null
+    if (this.billboards) {
+      this.viewer.scene.primitives.remove(this.billboards)
+      this.billboards = null
     }
     this.clearOrbitPath()
     this.satellites = []
@@ -184,9 +184,9 @@ export class SatelliteLayer extends BaseDataLayer {
   }
 
   private updatePositions() {
-    if (!this.pointCollection) return
+    if (!this.billboards) return
 
-    this.pointCollection.removeAll()
+    this.billboards.removeAll()
     const now = new Date()
 
     for (const sat of this.satellites) {
@@ -202,17 +202,21 @@ export class SatelliteLayer extends BaseDataLayer {
         const alt = geo.height * 1000 // km to m
 
         const color = sat.orbitClass === 'LEO'
-          ? Cesium.Color.CYAN.withAlpha(0.7)
+          ? Cesium.Color.CYAN
           : sat.orbitClass === 'MEO'
-            ? Cesium.Color.YELLOW.withAlpha(0.7)
-            : Cesium.Color.MAGENTA.withAlpha(0.7)
+            ? Cesium.Color.YELLOW
+            : Cesium.Color.MAGENTA
 
-        this.pointCollection.add({
+        this.billboards.add({
           position: Cesium.Cartesian3.fromDegrees(lon, lat, alt),
-          pixelSize: sat.orbitClass === 'GEO' ? 3 : 2,
+          image: '/satellite-icon.svg',
+          width: 18,
+          height: 18,
           color,
           id: `sat-${sat.noradId}`,
-        } as Cesium.PointPrimitive)
+          scale: sat.orbitClass === 'GEO' ? 1.2 : 0.9,
+          scaleByDistance: new Cesium.NearFarScalar(1e5, 1.0, 1e7, 0.3),
+        })
       } catch {
         // Skip propagation failures
       }

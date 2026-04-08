@@ -32,7 +32,7 @@ export class TrafficLayer extends BaseDataLayer {
   private roads: RoadSegment[] = []
   private entities: Cesium.Entity[] = []
   private particles: TrafficParticle[] = []
-  private particleCollection: Cesium.PointPrimitiveCollection | null = null
+  private particleCollection: Cesium.BillboardCollection | null = null
   private loadPhase = 0
   private animFrameId: number | null = null
 
@@ -233,7 +233,7 @@ export class TrafficLayer extends BaseDataLayer {
 
   private startAnimation() {
     if (!this.particleCollection) {
-      this.particleCollection = new Cesium.PointPrimitiveCollection()
+      this.particleCollection = new Cesium.BillboardCollection({ scene: this.viewer.scene })
       this.viewer.scene.primitives.add(this.particleCollection)
     }
 
@@ -249,10 +249,21 @@ export class TrafficLayer extends BaseDataLayer {
         if (!road || road.coords.length < 2) continue
         const [lon, lat] = this.interpolateRoad(road, p.progress)
 
+        // Compute heading from road direction at current position
+        const nextProgress = Math.min(p.progress + 0.01, 1)
+        const [lon2, lat2] = this.interpolateRoad(road, nextProgress)
+        const heading = Math.atan2(lon2 - lon, lat2 - lat)
+
+        const iconSize = road.type === 'highway' ? 14 : 10
         this.particleCollection!.add({
           position: Cesium.Cartesian3.fromDegrees(lon, lat, 8),
-          pixelSize: road.type === 'highway' ? 3 : 2,
+          image: '/traffic-icon.svg',
+          width: iconSize,
+          height: iconSize,
           color: Cesium.Color.fromCssColorString('#00ff41').withAlpha(0.9),
+          rotation: -heading,
+          alignedAxis: Cesium.Cartesian3.UNIT_Z,
+          scaleByDistance: new Cesium.NearFarScalar(1e3, 1.0, 1e6, 0.3),
         })
       }
 
