@@ -142,6 +142,11 @@ export function LeftPanel() {
           Q/W/E/R/T — cycle POIs
         </div>
       </div>
+
+      {/* Mascots */}
+      <div className="p-2 border-t border-[var(--color-hud-border)] flex justify-center">
+        <img src="/mice.svg" alt="Tonight we take over the world" className="w-full max-w-[180px] opacity-60 hover:opacity-100 transition-opacity" />
+      </div>
     </div>
   )
 }
