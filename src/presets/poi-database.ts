@@ -155,8 +155,13 @@ const STANDARD_POIS: POI[] = [
     image: '/poi/harbour_bridge.jpg', desc: 'Steel through arch bridge across Sydney Harbour' },
 ]
 
+// Cache-bust version (increment on redeploy to bypass CDN cache)
+const V = '?v=2'
+
 // Merge HQ locations at the front, then standard POIs
-export const POI_DATABASE: POI[] = [...HQ_LOCATIONS, ...STANDARD_POIS]
+export const POI_DATABASE: POI[] = [...HQ_LOCATIONS, ...STANDARD_POIS].map(p =>
+  p.image ? { ...p, image: p.image + V } : p
+)
 
 export const CITIES = [...new Set(POI_DATABASE.map((p) => p.city))].sort()
 
