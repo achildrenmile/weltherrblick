@@ -56,7 +56,7 @@ export default function App() {
     }
     if (!ionToken) {
       // Use bundled NaturalEarthII textures (local, no network) as base
-      ;(opts as any).imageryProvider = new Cesium.TileMapServiceImageryProvider({
+      ;(opts as any).imageryProvider = new (Cesium.TileMapServiceImageryProvider as any)({
         url: Cesium.buildModuleUrl('Assets/Textures/NaturalEarthII'),
       })
     }
