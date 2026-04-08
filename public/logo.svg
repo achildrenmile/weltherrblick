@@ -1,0 +1,106 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a0a0a"/>
+      <stop offset="100%" style="stop-color:#111"/>
+    </linearGradient>
+    <linearGradient id="brainGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#ff69b4"/>
+      <stop offset="100%" style="stop-color:#cc3388"/>
+    </linearGradient>
+    <linearGradient id="greenGlow" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#00ff41"/>
+      <stop offset="100%" style="stop-color:#00cc33"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="bigGlow">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background circle -->
+  <circle cx="256" cy="256" r="250" fill="url(#bgGrad)" stroke="#00ff41" stroke-width="2" opacity="0.9"/>
+  <circle cx="256" cy="256" r="245" fill="none" stroke="#00ff41" stroke-width="0.5" opacity="0.3"/>
+
+  <!-- Globe grid lines (subtle) -->
+  <g opacity="0.15" stroke="#00ff41" stroke-width="0.8" fill="none">
+    <!-- Latitude lines -->
+    <ellipse cx="256" cy="200" rx="180" ry="20"/>
+    <ellipse cx="256" cy="256" rx="200" ry="25"/>
+    <ellipse cx="256" cy="312" rx="180" ry="20"/>
+    <!-- Longitude lines -->
+    <ellipse cx="256" cy="256" rx="30" ry="150"/>
+    <ellipse cx="256" cy="256" rx="80" ry="150"/>
+    <ellipse cx="256" cy="256" rx="140" ry="150"/>
+    <ellipse cx="256" cy="256" rx="200" ry="150"/>
+  </g>
+
+  <!-- Brain silhouette (stylized, centered) -->
+  <g transform="translate(256, 210)" filter="url(#glow)">
+    <!-- Brain body -->
+    <path d="M-60,-40 C-65,-70 -40,-90 -15,-85 C0,-100 25,-95 40,-80 C55,-85 70,-65 65,-45 C75,-30 70,-5 55,5 C60,25 45,40 25,38 C15,50 -10,50 -25,38 C-40,45 -55,35 -55,15 C-70,5 -75,-20 -60,-40Z"
+          fill="url(#brainGrad)" opacity="0.9"/>
+    <!-- Brain folds -->
+    <path d="M-30,-60 C-15,-45 5,-55 15,-70" fill="none" stroke="#ff99cc" stroke-width="2" opacity="0.6"/>
+    <path d="M-45,-25 C-25,-15 -5,-30 15,-20 C30,-15 40,-25 50,-15" fill="none" stroke="#ff99cc" stroke-width="2" opacity="0.6"/>
+    <path d="M-40,10 C-20,20 0,5 20,15 C35,22 45,10 50,0" fill="none" stroke="#ff99cc" stroke-width="2" opacity="0.6"/>
+    <!-- Brain center divide -->
+    <line x1="0" y1="-85" x2="0" y2="40" stroke="#cc3388" stroke-width="1.5" opacity="0.4"/>
+  </g>
+
+  <!-- Crosshair overlay on brain -->
+  <g transform="translate(256, 210)" opacity="0.4" stroke="#00ff41" stroke-width="1">
+    <line x1="-90" y1="0" x2="-20" y2="0"/>
+    <line x1="20" y1="0" x2="90" y2="0"/>
+    <line x1="0" y1="-90" x2="0" y2="-20"/>
+    <line x1="0" y1="20" x2="0" y2="90"/>
+    <circle cx="0" cy="0" r="15" fill="none"/>
+  </g>
+
+  <!-- Scanning line (animated feel) -->
+  <rect x="56" y="250" width="400" height="1" fill="#00ff41" opacity="0.2"/>
+
+  <!-- HUD corner brackets -->
+  <g stroke="#00ff41" stroke-width="2" fill="none" opacity="0.6">
+    <!-- Top-left -->
+    <path d="M30,60 L30,30 L60,30"/>
+    <!-- Top-right -->
+    <path d="M452,30 L482,30 L482,60"/>
+    <!-- Bottom-left -->
+    <path d="M30,452 L30,482 L60,482"/>
+    <!-- Bottom-right -->
+    <path d="M452,482 L482,482 L482,452"/>
+  </g>
+
+  <!-- Title text -->
+  <text x="256" y="340" font-family="monospace" font-size="28" font-weight="bold"
+        fill="#00ff41" text-anchor="middle" filter="url(#bigGlow)" letter-spacing="4">
+    WELTHERRBLICK
+  </text>
+
+  <!-- Subtitle -->
+  <text x="256" y="370" font-family="monospace" font-size="11"
+        fill="#00ff41" text-anchor="middle" opacity="0.6" letter-spacing="3">
+    GEOINT DASHBOARD
+  </text>
+
+  <!-- Pinky quote -->
+  <text x="256" y="405" font-family="monospace" font-size="8"
+        fill="#ff69b4" text-anchor="middle" opacity="0.7" letter-spacing="1">
+    "The same thing we do every night, Pinky..."
+  </text>
+
+  <!-- Status indicators -->
+  <g transform="translate(80, 440)" opacity="0.5">
+    <circle cx="0" cy="0" r="3" fill="#00ff41"/>
+    <text x="10" y="4" font-family="monospace" font-size="8" fill="#00ff41">SYS ONLINE</text>
+  </g>
+  <g transform="translate(350, 440)" opacity="0.5">
+    <circle cx="0" cy="0" r="3" fill="#ff69b4"/>
+    <text x="10" y="4" font-family="monospace" font-size="8" fill="#ff69b4">NARF!</text>
+  </g>
+</svg>
