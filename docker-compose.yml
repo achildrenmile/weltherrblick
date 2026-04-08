@@ -1,0 +1,11 @@
+services:
+  weltherrblick:
+    build: .
+    container_name: weltherrblick
+    restart: unless-stopped
+    networks:
+      - cloudflared-tunnel
+
+networks:
+  cloudflared-tunnel:
+    external: true

@@ -1,0 +1,110 @@
+@import "tailwindcss";
+
+@theme {
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+  --color-hud-green: #00ff41;
+  --color-hud-amber: #ffb000;
+  --color-hud-red: #ff3333;
+  --color-hud-cyan: #00d4ff;
+  --color-hud-bg: rgba(0, 0, 0, 0.85);
+  --color-hud-border: rgba(0, 255, 65, 0.3);
+  --color-hud-panel: rgba(0, 10, 2, 0.9);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #000;
+  font-family: var(--font-mono);
+}
+
+/* Cesium widget overrides */
+.cesium-viewer {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.cesium-viewer-bottom,
+.cesium-viewer-animationContainer,
+.cesium-viewer-timelineContainer,
+.cesium-viewer-fullscreenContainer,
+.cesium-viewer-vrContainer,
+.cesium-viewer-geocoderContainer,
+.cesium-viewer-toolbar,
+.cesium-viewer-selectionIndicator,
+.cesium-credit-logoContainer,
+.cesium-credit-textContainer,
+.cesium-performanceDisplay-defaultContainer {
+  display: none !important;
+}
+
+/* HUD glow effects */
+.hud-glow {
+  text-shadow: 0 0 6px var(--color-hud-green), 0 0 12px rgba(0, 255, 65, 0.3);
+}
+
+.hud-glow-amber {
+  text-shadow: 0 0 6px var(--color-hud-amber), 0 0 12px rgba(255, 176, 0, 0.3);
+}
+
+.hud-glow-red {
+  text-shadow: 0 0 6px var(--color-hud-red), 0 0 12px rgba(255, 51, 51, 0.3);
+}
+
+.hud-glow-cyan {
+  text-shadow: 0 0 6px var(--color-hud-cyan), 0 0 12px rgba(0, 212, 255, 0.3);
+}
+
+/* Panel styling */
+.hud-panel {
+  background: var(--color-hud-panel);
+  border: 1px solid var(--color-hud-border);
+  backdrop-filter: blur(8px);
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 255, 65, 0.3);
+  border-radius: 2px;
+}
+
+/* Subtle CRT flicker — slow enough to be atmospheric, not seizure-inducing */
+@keyframes crt-flicker {
+  0%, 100% { opacity: 1; }
+  92% { opacity: 0.98; }
+  95% { opacity: 0.96; }
+  97% { opacity: 0.99; }
+}
+
+.crt-flicker {
+  animation: crt-flicker 4s ease-in-out infinite;
+}
+
+/* Pulse animation for earthquake markers */
+@keyframes pulse-ring {
+  0% { transform: scale(1); opacity: 0.8; }
+  100% { transform: scale(3); opacity: 0; }
+}
+
+/* Status light */
+@keyframes blink-slow {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+.status-blink {
+  animation: blink-slow 2s ease-in-out infinite;
+}

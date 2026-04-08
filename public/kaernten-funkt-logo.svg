@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 200">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a0a00"/>
+      <stop offset="100%" style="stop-color:#0a0500"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffcc00"/>
+      <stop offset="100%" style="stop-color:#ff8800"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <!-- Background -->
+  <rect width="400" height="200" fill="url(#bg)" rx="4"/>
+  <rect x="1" y="1" width="398" height="198" fill="none" stroke="#ffb000" stroke-width="1.5" rx="4" opacity="0.5"/>
+  <!-- Radio wave symbol -->
+  <g transform="translate(70, 100)" filter="url(#glow)">
+    <!-- Antenna -->
+    <line x1="0" y1="20" x2="0" y2="-30" stroke="#ffb000" stroke-width="3" stroke-linecap="round"/>
+    <circle cx="0" cy="-33" r="4" fill="#ffcc00"/>
+    <!-- Waves -->
+    <path d="M 10,-20 Q 20,-35 10,-50" fill="none" stroke="#ffb000" stroke-width="2" opacity="0.9"/>
+    <path d="M 18,-15 Q 32,-35 18,-55" fill="none" stroke="#ffb000" stroke-width="2" opacity="0.6"/>
+    <path d="M 26,-10 Q 44,-35 26,-60" fill="none" stroke="#ffb000" stroke-width="2" opacity="0.3"/>
+    <path d="M -10,-20 Q -20,-35 -10,-50" fill="none" stroke="#ffb000" stroke-width="2" opacity="0.9"/>
+    <path d="M -18,-15 Q -32,-35 -18,-55" fill="none" stroke="#ffb000" stroke-width="2" opacity="0.6"/>
+    <path d="M -26,-10 Q -44,-35 -26,-60" fill="none" stroke="#ffb000" stroke-width="2" opacity="0.3"/>
+    <!-- Base -->
+    <line x1="-12" y1="20" x2="12" y2="20" stroke="#ffb000" stroke-width="3" stroke-linecap="round"/>
+  </g>
+  <!-- Text -->
+  <text x="130" y="85" font-family="monospace" font-size="32" font-weight="bold" fill="url(#gold)" filter="url(#glow)">KÄRNTEN</text>
+  <text x="130" y="120" font-family="monospace" font-size="32" font-weight="bold" fill="url(#gold)" filter="url(#glow)">FUNKT</text>
+  <!-- Subtitle -->
+  <text x="130" y="148" font-family="monospace" font-size="11" fill="#886600" letter-spacing="3">AMATEURFUNK · CB · PMR</text>
+  <!-- Tagline -->
+  <text x="130" y="170" font-family="monospace" font-size="9" fill="#554400" letter-spacing="2">VILLACH · GLOBO PLAZA · OPS CENTER</text>
+</svg>
