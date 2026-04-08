@@ -56,7 +56,7 @@ export default function App() {
     }
     if (!ionToken) {
       // Use bundled NaturalEarthII textures (local, no network) as base
-      opts.imageryProvider = new Cesium.TileMapServiceImageryProvider({
+      ;(opts as any).imageryProvider = new Cesium.TileMapServiceImageryProvider({
         url: Cesium.buildModuleUrl('Assets/Textures/NaturalEarthII'),
       })
     }
@@ -76,8 +76,8 @@ export default function App() {
     viewer.scene.globe.enableLighting = false
     viewer.scene.fog.enabled = true
     viewer.scene.fog.density = 0.0002
-    viewer.scene.sun.show = false
-    viewer.scene.moon.show = false
+    if (viewer.scene.sun) viewer.scene.sun.show = false
+    if (viewer.scene.moon) viewer.scene.moon.show = false
     viewer.scene.highDynamicRange = false
     viewer.scene.globe.depthTestAgainstTerrain = false
     viewer.scene.backgroundColor = Cesium.Color.BLACK

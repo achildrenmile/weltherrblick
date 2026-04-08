@@ -46,7 +46,7 @@ export function CesiumGlobe() {
 
     // Use OSM tiles when no Ion token
     if (!ION_TOKEN) {
-      viewerOpts.imageryProvider = new Cesium.OpenStreetMapImageryProvider({
+      ;(viewerOpts as any).imageryProvider = new Cesium.OpenStreetMapImageryProvider({
         url: '/api/osm-tiles/',
       })
     }
@@ -59,9 +59,9 @@ export function CesiumGlobe() {
     viewer.scene.globe.showGroundAtmosphere = true
     viewer.scene.fog.enabled = true
     viewer.scene.fog.density = 0.0002
-    viewer.scene.skyAtmosphere.show = true
-    viewer.scene.sun.show = false
-    viewer.scene.moon.show = false
+    if (viewer.scene.skyAtmosphere) viewer.scene.skyAtmosphere.show = true
+    if (viewer.scene.sun) viewer.scene.sun.show = false
+    if (viewer.scene.moon) viewer.scene.moon.show = false
     viewer.scene.highDynamicRange = false
     viewer.scene.globe.depthTestAgainstTerrain = false
 
