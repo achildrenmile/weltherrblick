@@ -564,6 +564,12 @@ function POIInfoCard({ poi, onClose }: { poi: POI; onClose: () => void }) {
   const isHQ = poi.isHQ === true
   const accent = isHQ ? '#ffb000' : '#00ff41'
 
+  // Reset image state when POI changes
+  useEffect(() => {
+    setImgLoaded(false)
+    setImgError(false)
+  }, [poi])
+
   // Auto-dismiss after 12 seconds
   useEffect(() => {
     const id = setTimeout(onClose, 12000)
